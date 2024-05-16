@@ -31,6 +31,10 @@ class Menu:
             xTileSize=180,
             yTileSize=88,
         )
+
+        # original_image = pygame.image.load("./img/title_new.png")
+        # original_image.set_colorkey([255, 0, 220], pygame.RLEACCEL)
+        # self.menu_banner = pygame.transform.scale(original_image, (180*2, 88*2)) 
         self.menu_dot = self.spritesheet.image_at(
             0, 150, 2, colorkey=[255, 0, 220], ignoreTileSize=True
         )
