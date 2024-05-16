@@ -37,7 +37,8 @@ bigAnimation = Animation(
 class Mario(EntityBase):
     def __init__(self, x, y, level, screen, dashboard, sound, gravity=0.8):
         super(Mario, self).__init__(x, y, gravity)
-        self.camera = Camera(self.rect, self)
+        self.levelObj = level
+        self.camera = Camera(self.rect, self, self.levelObj.levelLength)
         self.sound = sound
         self.input = Input(self)
         self.inAir = False
@@ -50,7 +51,7 @@ class Mario(EntityBase):
             "bounceTrait": bounceTrait(self),
         }
 
-        self.levelObj = level
+        
         self.collision = Collider(self, level)
         self.screen = screen
         self.EntityCollider = EntityCollider(self)
