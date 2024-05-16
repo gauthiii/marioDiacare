@@ -52,10 +52,14 @@ class Dashboard(Font):
         background_color = (50, 50, 50)  # Dark gray
         pygame.draw.rect(self.screen, background_color, [x, y, width, height])
 
+        # Ensure that points do not exceed max_points
+        current_points = min(self.points, self.max_points)
+
         # Calculate width of the filled part
-        fill_width = int((self.points / self.max_points) * width)
+        fill_width = int((current_points / self.max_points) * width)
         fill_color = (0, 255, 0)  # Green
         pygame.draw.rect(self.screen, fill_color, [x, y, fill_width, height])
+
 
     def coinString(self):
         return "{:02d}".format(self.coins)
