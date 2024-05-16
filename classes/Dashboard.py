@@ -27,8 +27,8 @@ class Dashboard(Font):
         self.drawProgressBar(342, 45, 100, 10) 
         # self.drawText(str(self.levelName), 395, 37, 15)
 
-        self.drawText("GLUCON", 520, 20, 15)
-        self.drawProgressBar(522, 45, 100, 10) 
+        self.drawText("GLUCAGON", 518, 20, 15)
+        self.drawProgressBar(520, 45, 100, 10) 
         # if self.state != "menu":
         #     self.drawText(self.timeString(), 535, 37, 15)
 
