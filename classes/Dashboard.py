@@ -17,18 +17,20 @@ class Dashboard(Font):
 
 
     def update(self):
-        self.drawText("MARIO", 50, 20, 15)
-        self.drawProgressBar(50, 60, 100, 10)  # Drawing the progress bar below the points
-        self.drawText(self.pointString(), 50, 37, 15)
+        self.drawText("GLUCOSE LEVEL", 50, 20, 15)
+        self.drawProgressBar(50, 45, 100, 10)  # Drawing the progress bar below the points (chnaged 60 to 45)
+        # self.drawText(self.pointString(), 50, 37, 15)
 
-        self.drawText("@x{}".format(self.coinString()), 225, 37, 15)
+        self.drawText("@x{}".format(self.coinString()), 255, 37, 15)
 
-        self.drawText("SUGAR LEVEL", 340, 20, 15)
-        self.drawText(str(self.levelName), 395, 37, 15)
+        self.drawText("INSULIN", 340, 20, 15)
+        self.drawProgressBar(342, 45, 100, 10) 
+        # self.drawText(str(self.levelName), 395, 37, 15)
 
-        self.drawText("TIME", 520, 20, 15)
-        if self.state != "menu":
-            self.drawText(self.timeString(), 535, 37, 15)
+        self.drawText("GLUCON", 520, 20, 15)
+        self.drawProgressBar(522, 45, 100, 10) 
+        # if self.state != "menu":
+        #     self.drawText(self.timeString(), 535, 37, 15)
 
         # update Time
         self.ticks += 1
