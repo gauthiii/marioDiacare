@@ -17,17 +17,17 @@ class Dashboard(Font):
 
 
     def update(self):
-        self.drawText("GLUCOSE", 50, 20, 15)
+        self.glucose_text_rect = self.drawText("GLUCOSE", 50, 20, 15)
         self.drawProgressBar(50, 45, 100, 10,"glucose")  # Drawing the progress bar below the points (chnaged 60 to 45)
         # self.drawText(self.pointString(), 50, 37, 15)
 
         self.drawText("@x{}".format(self.coinString()), 215, 37, 15)
 
-        self.drawText("INSULIN", 330, 20, 15)
+        self.insulin_text_rect = self.drawText("INSULIN", 330, 20, 15)
         self.drawProgressBar(333, 45, 100, 10,"insulin") 
         # self.drawText(str(self.levelName), 395, 37, 15)
 
-        self.drawText("GLUCAGON", 495, 20, 15)
+        self.glucagon_text_rect = self.drawText("GLUCAGON", 495, 20, 15)
         self.drawProgressBar(498, 45, 100, 10,"glucagon") 
         # if self.state != "menu":
         #     self.drawText(self.timeString(), 535, 37, 15)
@@ -38,14 +38,27 @@ class Dashboard(Font):
             self.ticks = 0
             self.time += 1
 
+    # def drawText(self, text, x, y, size):
+    #     for char in text:
+    #         charSprite = pygame.transform.scale(self.charSprites[char], (size, size))
+    #         self.screen.blit(charSprite, (x, y))
+    #         if char == " ":
+    #             x += size//2
+    #         else:
+    #             x += size
+
     def drawText(self, text, x, y, size):
+        bounds = pygame.Rect(x, y, 0, size)  # Initialize the bounds of the text
         for char in text:
             charSprite = pygame.transform.scale(self.charSprites[char], (size, size))
             self.screen.blit(charSprite, (x, y))
             if char == " ":
-                x += size//2
+                x += size // 2
             else:
                 x += size
+            bounds.width += size  # Increase the width of the bounds for each character
+        return bounds
+
 
     def drawProgressBar(self, x, y, width, height,text):
         # Draw background of the progress bar

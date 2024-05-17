@@ -40,7 +40,9 @@ class Mario(EntityBase):
         self.levelObj = level
         self.camera = Camera(self.rect, self, self.levelObj.levelLength)
         self.sound = sound
-        self.input = Input(self)
+        self.dashboard = dashboard
+        self.screen = screen
+        self.input = Input(self,self.dashboard,self.screen)
         self.inAir = False
         self.inJump = False
         self.powerUpState = 0
@@ -53,9 +55,9 @@ class Mario(EntityBase):
 
         
         self.collision = Collider(self, level)
-        self.screen = screen
+        
         self.EntityCollider = EntityCollider(self)
-        self.dashboard = dashboard
+        
         self.restart = False
         self.pause = False
         self.pauseObj = Pause(screen, self, dashboard)
