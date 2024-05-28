@@ -1,5 +1,5 @@
 {
-    "spriteSheetURL": "./img/tilesnew.png",
+    "spriteSheetURL": "./img/tilesnew (1).png",
     "type":"animation",
     "sprites":[
         {
@@ -39,6 +39,28 @@
                 },
                 {
                     "x":26,
+                    "y":1,
+                    "scale":2
+                }
+            ],
+            "deltaTime":10,
+            "colorKey": -1
+        },
+        {
+            "name":"banana",
+            "images":[
+                {
+                    "x":27,
+                    "y":1,
+                    "scale":2
+                },
+                {
+                    "x":28,
+                    "y":1,
+                    "scale":2
+                },
+                {
+                    "x":29,
                     "y":1,
                     "scale":2
                 }

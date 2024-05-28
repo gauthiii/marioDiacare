@@ -4,6 +4,7 @@ import pygame
 from classes.Sprites import Sprites
 from classes.Tile import Tile
 from entities.Coin import Coin
+from entities.Banana import Banana
 from entities.CoinBrick import CoinBrick
 from entities.Goomba import Goomba
 from entities.Mushroom import RedMushroom
@@ -36,6 +37,7 @@ class Level:
             [self.addGoomba(x, y) for x, y in data["level"]["entities"]["Goomba"]]
             [self.addKoopa(x, y) for x, y in data["level"]["entities"]["Koopa"]]
             [self.addCoin(x, y) for x, y in data["level"]["entities"]["coin"]]
+            [self.addBanana(x, y) for x, y in data["level"]["entities"]["banana"]]
             [self.addCoinBrick(x, y) for x, y in data["level"]["entities"]["coinBrick"]]
             [self.addRandomBox(x, y, item) for x, y, item in data["level"]["entities"]["RandomBox"]]
         except:
@@ -175,6 +177,9 @@ class Level:
 
     def addCoin(self, x, y):
         self.entityList.append(Coin(self.screen, self.sprites.spriteCollection, x, y))
+    
+    def addBanana(self, x, y):
+        self.entityList.append(Banana(self.screen, self.sprites.spriteCollection, x, y))
 
     def addCoinBrick(self, x, y):
         self.level[y][x] = Tile(None, pygame.Rect(x * 32, y * 32 - 1, 32, 32))
