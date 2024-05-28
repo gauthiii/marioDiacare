@@ -4,7 +4,9 @@ import pygame
 from classes.Sprites import Sprites
 from classes.Tile import Tile
 from entities.Coin import Coin
+from entities.Coke import Coke
 from entities.Banana import Banana
+from entities.Broc import Broc
 from entities.CoinBrick import CoinBrick
 from entities.Goomba import Goomba
 from entities.Mushroom import RedMushroom
@@ -37,6 +39,8 @@ class Level:
             [self.addGoomba(x, y) for x, y in data["level"]["entities"]["Goomba"]]
             [self.addKoopa(x, y) for x, y in data["level"]["entities"]["Koopa"]]
             [self.addCoin(x, y) for x, y in data["level"]["entities"]["coin"]]
+            [self.addBroc(x, y) for x, y in data["level"]["entities"]["broc"]]
+            [self.addCoke(x, y) for x, y in data["level"]["entities"]["coke"]]
             [self.addBanana(x, y) for x, y in data["level"]["entities"]["banana"]]
             [self.addCoinBrick(x, y) for x, y in data["level"]["entities"]["coinBrick"]]
             [self.addRandomBox(x, y, item) for x, y, item in data["level"]["entities"]["RandomBox"]]
@@ -177,6 +181,12 @@ class Level:
 
     def addCoin(self, x, y):
         self.entityList.append(Coin(self.screen, self.sprites.spriteCollection, x, y))
+
+    def addCoke(self, x, y):
+        self.entityList.append(Coke(self.screen, self.sprites.spriteCollection, x, y))
+
+    def addBroc(self, x, y):
+        self.entityList.append(Broc(self.screen, self.sprites.spriteCollection, x, y))
     
     def addBanana(self, x, y):
         self.entityList.append(Banana(self.screen, self.sprites.spriteCollection, x, y))
