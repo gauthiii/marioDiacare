@@ -9,7 +9,7 @@ class Coke(EntityBase):
         self.screen = screen
         self.spriteCollection = spriteCollection
         self.animation = copy(self.spriteCollection.get("coke").animation)
-        self.type = "Item"
+        self.type = "Unhealthy"
 
     def update(self, cam):
         if self.alive:

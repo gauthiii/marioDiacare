@@ -88,12 +88,38 @@ class Mario(EntityBase):
                     self._onCollisionWithBlock(ent)
                 elif ent.type == "Mob":
                     self._onCollisionWithMob(ent, collisionState)
+                elif ent.type == "Unhealthy":
+                    self._onCollisionWithUnhealthy(ent)
 
     def _onCollisionWithItem(self, item):
+        # if item.name == "broc":
+        #     self.show_text_animation("Healthy", self.getPos())
+        # if item.name == "coke":
+        #     self.show_text_animation("Unhealthy", self.getPos())
         self.levelObj.entityList.remove(item)
         self.dashboard.points += 100
         self.dashboard.coins += 1
         self.sound.play_sfx(self.sound.coin)
+
+    def _onCollisionWithUnhealthy(self, item):
+        self.levelObj.entityList.remove(item)
+        self.dashboard.points -= 100
+        self.dashboard.coins -= 1
+        self.sound.play_sfx(self.sound.kick)
+        # self.dashboard.drawText("-100", self.rect.x + self.camera.x, self.rect.y, 8)
+
+
+    def show_text_animation(self, text, position):
+        font = pygame.font.Font(None, 36)  # Use appropriate font and size
+        text_surface = font.render(text, True, (255, 255, 255))  # White text for visibility
+        text_rect = text_surface.get_rect(center=(position[0], position[1] - 20))  # Adjust position as needed
+
+        # Display the text for a few frames
+        for _ in range(30):  # Show text for 30 frames, adjust as needed for timing
+            self.screen.blit(text_surface, text_rect)
+            pygame.display.update()
+            pygame.time.delay(33)  # Delay to control the speed of the animation
+
 
     def _onCollisionWithBlock(self, block):
         if not block.triggered:
