@@ -84,7 +84,7 @@ class Dashboard(Font):
         elif text=="insulin":
             current_points = min(self.points1, self.max_points)
             fill_color = (255, 0, 0)  # Red
-            fill_width = int((current_points / self.max_points) * width)*0.7
+            fill_width = int((current_points / self.max_points) * width)
         else:
             current_points = min(self.points, self.max_points)
             fill_color = (255, 255, 0)  # Yellow
