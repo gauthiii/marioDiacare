@@ -1,8 +1,9 @@
 class JumpTrait:
-    def __init__(self, entity):
+    def __init__(self, entity,dashboard):
         self.verticalSpeed = -12
         self.jumpHeight = 120
         self.entity = entity
+        self.dashboard = dashboard
         self.initalHeight = 384
         self.deaccelerationHeight = self.jumpHeight - ((self.verticalSpeed*self.verticalSpeed)/(2*self.entity.gravity))
 
@@ -15,6 +16,8 @@ class JumpTrait:
                 self.initalHeight = self.entity.rect.y
                 self.entity.inJump = True
                 self.entity.obeyGravity = False  # always reach maximum height
+                self.dashboard.points -= 5
+                self.dashboard.points1 += 100
 
         if self.entity.inJump:
             if (self.initalHeight-self.entity.rect.y) >= self.deaccelerationHeight or self.entity.vel.y == 0:

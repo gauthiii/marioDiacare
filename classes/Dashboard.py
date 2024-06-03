@@ -10,6 +10,8 @@ class Dashboard(Font):
         self.screen = screen
         self.levelName = ""
         self.points = 0
+        self.points1 = 0
+        self.points2 = 0
         self.coins = 0
         self.ticks = 0
         self.time = 0
@@ -21,14 +23,18 @@ class Dashboard(Font):
         self.drawProgressBar(50, 45, 100, 10,"glucose")  # Drawing the progress bar below the points (chnaged 60 to 45)
         # self.drawText(self.pointString(), 50, 37, 15)
 
-        self.drawText("@x{}".format(self.coinString()), 215, 37, 15)
+        # self.drawText("@x{}".format(self.coinString()), 215, 37, 15)
 
-        self.insulin_text_rect = self.drawText("INSULIN", 330, 20, 15)
-        self.drawProgressBar(333, 45, 100, 10,"insulin") 
-        # self.drawText(str(self.levelName), 395, 37, 15)
+        self.insulin_text_rect = self.drawText("INSULIN", 480, 20, 15)
+        self.drawProgressBar(483, 45, 100, 10,"insulin") 
+        self.drawText(str(self.points), 395, 37, 15)
 
-        self.glucagon_text_rect = self.drawText("GLUCAGON", 495, 20, 15)
-        self.drawProgressBar(498, 45, 100, 10,"glucagon") 
+        if (self.points>1500):
+            self.drawText("WARNING!!!", 215, 40, 10)
+            self.drawText("GLUCOSE LEVEL IS HIGH", 215, 60, 10)
+
+        # self.glucagon_text_rect = self.drawText("GLUCAGON", 495, 20, 15)
+        # self.drawProgressBar(498, 45, 100, 10,"glucagon") 
         # if self.state != "menu":
         #     self.drawText(self.timeString(), 535, 37, 15)
 
@@ -72,12 +78,15 @@ class Dashboard(Font):
         fill_width = 0
         fill_color=(0,0,0)
         if text=="glucose":
+            current_points = min(self.points, self.max_points)
             fill_color = (0, 255, 0)  # Green
             fill_width = int((current_points / self.max_points) * width)
         elif text=="insulin":
+            current_points = min(self.points1, self.max_points)
             fill_color = (255, 0, 0)  # Red
             fill_width = int((current_points / self.max_points) * width)*0.7
         else:
+            current_points = min(self.points, self.max_points)
             fill_color = (255, 255, 0)  # Yellow
             fill_width = int((current_points / self.max_points) * width)*0.4
         pygame.draw.rect(self.screen, fill_color, [x, y, fill_width, height])

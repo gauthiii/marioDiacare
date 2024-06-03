@@ -48,8 +48,8 @@ class Mario(EntityBase):
         self.powerUpState = 0
         self.invincibilityFrames = 0
         self.traits = {
-            "jumpTrait": JumpTrait(self),
-            "goTrait": GoTrait(smallAnimation, screen, self.camera, self),
+            "jumpTrait": JumpTrait(self,dashboard),
+            "goTrait": GoTrait(smallAnimation, screen, self.camera, self,dashboard),
             "bounceTrait": bounceTrait(self),
         }
 
@@ -103,7 +103,7 @@ class Mario(EntityBase):
 
     def _onCollisionWithUnhealthy(self, item):
         self.levelObj.entityList.remove(item)
-        self.dashboard.points -= 100
+        self.dashboard.points -= 15
         self.dashboard.coins -= 1
         self.sound.play_sfx(self.sound.kick)
         # self.dashboard.drawText("-100", self.rect.x + self.camera.x, self.rect.y, 8)
@@ -124,6 +124,9 @@ class Mario(EntityBase):
     def _onCollisionWithBlock(self, block):
         if not block.triggered:
             self.dashboard.coins += 1
+            self.powerup(1)
+            pygame.time.delay(5)
+            self.powerUpState = 0
             self.sound.play_sfx(self.sound.bump)
         block.triggered = True
 
@@ -176,7 +179,7 @@ class Mario(EntityBase):
             ent.alive = True
             ent.active = False
             ent.bouncing = False
-        self.dashboard.points += 100
+        self.dashboard.points += 500
 
     def gameOver(self):
         srf = pygame.Surface((640, 480))

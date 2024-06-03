@@ -2,7 +2,7 @@ from pygame.transform import flip
 
 
 class GoTrait:
-    def __init__(self, animation, screen, camera, ent):
+    def __init__(self, animation, screen, camera, ent,dashboard):
         self.animation = animation
         self.direction = 0
         self.heading = 1
@@ -13,6 +13,7 @@ class GoTrait:
         self.boost = False
         self.camera = camera
         self.entity = ent
+        self.dashboard = dashboard
 
     def update(self):
         if self.boost:
@@ -26,6 +27,7 @@ class GoTrait:
 
         if self.direction != 0:
             self.heading = self.direction
+            self.dashboard.points -= 1
             if self.heading == 1:
                 if self.entity.vel.x < self.maxVel:
                     self.entity.vel.x += self.accelVel * self.heading
