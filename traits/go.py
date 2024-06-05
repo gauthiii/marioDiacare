@@ -41,6 +41,7 @@ class GoTrait:
                 self.animation.inAir()
         else:
             self.animation.update()
+            # self.dashboard.points -= 5
             if self.entity.vel.x >= 0:
                 self.entity.vel.x -= self.decelVel
             else:

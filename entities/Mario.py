@@ -124,10 +124,8 @@ class Mario(EntityBase):
     def _onCollisionWithBlock(self, block):
         if not block.triggered:
             self.dashboard.coins += 1
-            self.powerup(1)
-            pygame.time.delay(5)
-            self.powerUpState = 0
             self.sound.play_sfx(self.sound.bump)
+            self.powerup(1)
         block.triggered = True
 
     def _onCollisionWithMob(self, mob, collisionState):
