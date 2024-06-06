@@ -32,9 +32,9 @@ class Menu:
             yTileSize=88,
         )
 
-        # original_image = pygame.image.load("./img/title_new.png")
-        # original_image.set_colorkey([255, 0, 220], pygame.RLEACCEL)
-        # self.menu_banner = pygame.transform.scale(original_image, (180*2, 88*2)) 
+        original_image = pygame.image.load("./img/Title DiaCare (1).png")
+        original_image.set_colorkey([255, 0, 220], pygame.RLEACCEL)
+        self.menu_banner = pygame.transform.scale(original_image, (180*2,180)) 
         self.menu_dot = self.spritesheet.image_at(
             0, 150, 2, colorkey=[255, 0, 220], ignoreTileSize=True
         )
@@ -61,14 +61,22 @@ class Menu:
             self.screen.blit(self.menu_dot, (145, 273))
             self.screen.blit(self.menu_dot2, (145, 313))
             self.screen.blit(self.menu_dot2, (145, 353))
+            self.screen.blit(self.menu_dot2, (145, 393))
         elif self.state == 1:
             self.screen.blit(self.menu_dot, (145, 313))
             self.screen.blit(self.menu_dot2, (145, 273))
             self.screen.blit(self.menu_dot2, (145, 353))
+            self.screen.blit(self.menu_dot2, (145, 393))
         elif self.state == 2:
             self.screen.blit(self.menu_dot, (145, 353))
             self.screen.blit(self.menu_dot2, (145, 273))
             self.screen.blit(self.menu_dot2, (145, 313))
+            self.screen.blit(self.menu_dot2, (145, 393))
+        elif self.state == 3:
+            self.screen.blit(self.menu_dot, (145, 393))
+            self.screen.blit(self.menu_dot2, (145, 273))
+            self.screen.blit(self.menu_dot2, (145, 313))
+            self.screen.blit(self.menu_dot2, (145, 353))
 
     def loadSettings(self, url):
         try:
@@ -98,9 +106,10 @@ class Menu:
 
     def drawMenu(self):
         self.drawDot()
-        self.dashboard.drawText("CHOOSE LEVEL", 180, 280, 24)
-        self.dashboard.drawText("SETTINGS", 180, 320, 24)
-        self.dashboard.drawText("EXIT", 180, 360, 24)
+        self.dashboard.drawText("LEARN", 180, 280, 24)
+        self.dashboard.drawText("CHOOSE LEVEL", 180, 320, 24)
+        self.dashboard.drawText("SETTINGS", 180, 360, 24)
+        self.dashboard.drawText("EXIT", 180, 400, 24)
 
     def drawMenuBackground(self, withBanner=True):
         for y in range(0, 13):
@@ -231,7 +240,7 @@ class Menu:
                         if self.currSelectedLevel+3 <= self.levelCount:
                             self.currSelectedLevel += 3
                             self.drawLevelChooser()
-                    if self.state < 2:
+                    if self.state < 3:
                         self.state += 1
                 elif event.key == pygame.K_LEFT or event.key == pygame.K_h:
                     if self.currSelectedLevel > 1:
@@ -254,9 +263,11 @@ class Menu:
                         if self.state == 0:
                             self.chooseLevel()
                         elif self.state == 1:
+                            self.chooseLevel()
+                        elif self.state == 2:
                             self.inSettings = True
                             self.state = 0
-                        elif self.state == 2:
+                        elif self.state == 3:
                             pygame.quit()
                             sys.exit()
                     else:
