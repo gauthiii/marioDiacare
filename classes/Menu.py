@@ -58,25 +58,25 @@ class Menu:
 
     def drawDot(self):
         if self.state == 0:
-            self.screen.blit(self.menu_dot, (145, 273))
-            self.screen.blit(self.menu_dot2, (145, 313))
-            self.screen.blit(self.menu_dot2, (145, 353))
-            self.screen.blit(self.menu_dot2, (145, 393))
+            self.screen.blit(self.menu_dot, (145, 263))
+            self.screen.blit(self.menu_dot2, (145, 303))
+            self.screen.blit(self.menu_dot2, (145, 343))
+            self.screen.blit(self.menu_dot2, (145, 383))
         elif self.state == 1:
-            self.screen.blit(self.menu_dot, (145, 313))
-            self.screen.blit(self.menu_dot2, (145, 273))
-            self.screen.blit(self.menu_dot2, (145, 353))
-            self.screen.blit(self.menu_dot2, (145, 393))
+            self.screen.blit(self.menu_dot, (145, 303))
+            self.screen.blit(self.menu_dot2, (145, 263))
+            self.screen.blit(self.menu_dot2, (145, 343))
+            self.screen.blit(self.menu_dot2, (145, 383))
         elif self.state == 2:
-            self.screen.blit(self.menu_dot, (145, 353))
-            self.screen.blit(self.menu_dot2, (145, 273))
-            self.screen.blit(self.menu_dot2, (145, 313))
-            self.screen.blit(self.menu_dot2, (145, 393))
+            self.screen.blit(self.menu_dot, (145, 343))
+            self.screen.blit(self.menu_dot2, (145, 263))
+            self.screen.blit(self.menu_dot2, (145, 303))
+            self.screen.blit(self.menu_dot2, (145, 383))
         elif self.state == 3:
-            self.screen.blit(self.menu_dot, (145, 393))
-            self.screen.blit(self.menu_dot2, (145, 273))
-            self.screen.blit(self.menu_dot2, (145, 313))
-            self.screen.blit(self.menu_dot2, (145, 353))
+            self.screen.blit(self.menu_dot, (145, 383))
+            self.screen.blit(self.menu_dot2, (145, 263))
+            self.screen.blit(self.menu_dot2, (145, 303))
+            self.screen.blit(self.menu_dot2, (145, 343))
 
     def loadSettings(self, url):
         try:
@@ -106,10 +106,10 @@ class Menu:
 
     def drawMenu(self):
         self.drawDot()
-        self.dashboard.drawText("LEARN", 180, 280, 24)
-        self.dashboard.drawText("CHOOSE LEVEL", 180, 320, 24)
-        self.dashboard.drawText("SETTINGS", 180, 360, 24)
-        self.dashboard.drawText("EXIT", 180, 400, 24)
+        self.dashboard.drawText("LEARN", 180, 270, 24)
+        self.dashboard.drawText("CHOOSE LEVEL", 180, 310, 24)
+        self.dashboard.drawText("SETTINGS", 180, 350, 24)
+        self.dashboard.drawText("EXIT", 180, 390, 24)
 
     def drawMenuBackground(self, withBanner=True):
         for y in range(0, 13):
@@ -149,17 +149,17 @@ class Menu:
 
     def drawSettings(self):
         self.drawDot()
-        self.dashboard.drawText("MUSIC", 180, 280, 24)
+        self.dashboard.drawText("MUSIC", 180, 270, 24)
         if self.music:
-            self.dashboard.drawText("ON", 340, 280, 24)
+            self.dashboard.drawText("ON", 340, 270, 24)
         else:
-            self.dashboard.drawText("OFF", 340, 280, 24)
-        self.dashboard.drawText("SFX", 180, 320, 24)
+            self.dashboard.drawText("OFF", 340, 270, 24)
+        self.dashboard.drawText("SFX", 180, 310, 24)
         if self.sfx:
-            self.dashboard.drawText("ON", 340, 320, 24)
+            self.dashboard.drawText("ON", 340, 310, 24)
         else:
-            self.dashboard.drawText("OFF", 340, 320, 24)
-        self.dashboard.drawText("BACK", 180, 360, 24)
+            self.dashboard.drawText("OFF", 340, 310, 24)
+        self.dashboard.drawText("BACK", 180, 350, 24)
 
     def chooseLevel(self):
         self.drawMenuBackground(False)

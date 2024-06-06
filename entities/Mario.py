@@ -97,13 +97,15 @@ class Mario(EntityBase):
         # if item.name == "coke":
         #     self.show_text_animation("Unhealthy", self.getPos())
         self.levelObj.entityList.remove(item)
-        self.dashboard.points += 100
+        if self.dashboard.points <= 2000:
+            self.dashboard.points += 100
         self.dashboard.coins += 1
         self.sound.play_sfx(self.sound.coin)
 
     def _onCollisionWithUnhealthy(self, item):
         self.levelObj.entityList.remove(item)
-        self.dashboard.points -= 15
+        if self.dashboard.points >= 150:
+            self.dashboard.points -= 150
         self.dashboard.coins -= 1
         self.sound.play_sfx(self.sound.kick)
         # self.dashboard.drawText("-100", self.rect.x + self.camera.x, self.rect.y, 8)
@@ -177,7 +179,8 @@ class Mario(EntityBase):
             ent.alive = True
             ent.active = False
             ent.bouncing = False
-        self.dashboard.points += 500
+        if self.dashboard.points <= 2000:
+            self.dashboard.points += 500
 
     def gameOver(self):
         srf = pygame.Surface((640, 480))
