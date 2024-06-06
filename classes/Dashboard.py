@@ -27,7 +27,7 @@ class Dashboard(Font):
 
         self.insulin_text_rect = self.drawText("INSULIN", 480, 20, 15)
         self.drawProgressBar(483, 45, 100, 10,"insulin") 
-        self.drawText(str(self.points), 395, 37, 15)
+        # self.drawText(str(self.points), 395, 37, 15)
 
         if (self.points>1500):
             self.drawText("WARNING!!!", 215, 40, 10)
