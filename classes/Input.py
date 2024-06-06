@@ -84,14 +84,14 @@ class Input:
 
                 # Check for text element clicks
                 if self.dashboard.glucose_text_rect.collidepoint(pos):
-                    self.showPopup('./img/glucose.png')
+                    self.showPopup('./img/Glucose Bar.png')
                     return  # Stop further processing to avoid triggering other actions
                 elif self.dashboard.insulin_text_rect.collidepoint(pos):
-                    self.showPopup('./img/insulin.png')
+                    self.showPopup('./img/Insulin bar.png')
                     return  # Stop further processing to avoid triggering other actions
-                elif self.dashboard.glucagon_text_rect.collidepoint(pos):
-                    self.showPopup('./img/glucagon.png')
-                    return  # Stop further processing to avoid triggering other actions
+                # elif self.dashboard.glucagon_text_rect.collidepoint(pos):
+                #     self.showPopup('./img/glucagon.png')
+                #     return  # Stop further processing to avoid triggering other actions
 
         # Only add objects if no popup is active
         # if not self.popup_visible:
