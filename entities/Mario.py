@@ -52,8 +52,20 @@ class Mario(EntityBase):
             "goTrait": GoTrait(smallAnimation, screen, self.camera, self,dashboard),
             "bounceTrait": bounceTrait(self),
         }
-        self.end_image = pygame.image.load('./img/Ending screen.png').convert_alpha()
+        self.end_image_original = pygame.image.load('./img/Ending screen.png').convert_alpha()
+        self.end_image_original1 = pygame.image.load('./img/Ending screen 1.png').convert_alpha()
+
+        # Set the desired dimensions for the end-level image
+        desired_width = 400  # Set to your desired width
+        desired_height = 300  # Set to your desired height
+        
+        # Scale the image to the desired dimensions
+        self.end_image = pygame.transform.scale(self.end_image_original, (desired_width, desired_height))
         self.end_image_rect = self.end_image.get_rect(center=(screen.get_width() / 2, screen.get_height() / 2))
+
+        self.end_image1 = pygame.transform.scale(self.end_image_original1, (desired_width, desired_height))
+        self.end_image_rect1 = self.end_image1.get_rect(center=(screen.get_width() / 2, screen.get_height() / 2))
+
 
         
         self.collision = Collider(self, level)
@@ -114,11 +126,17 @@ class Mario(EntityBase):
         self.sound.play_sfx(self.sound.powerup)
 
         # Display the image at the center of the screen
-        self.screen.blit(self.end_image, self.end_image_rect)
+        if self.dashboard.points<=1500:
+            self.screen.blit(self.end_image, self.end_image_rect)
+        elif self.dashboard.points>=500:
+            self.screen.blit(self.end_image, self.end_image_rect)
+        else:
+            self.screen.blit(self.end_image1, self.end_image_rect1)
         pygame.display.update()
 
         # Optionally, you might want to pause the game or wait for a user action to continue
         pygame.time.wait(2000)  # Pause for 2000 milliseconds (2 seconds)
+        self.restart = True
 
     def _onCollisionWithUnhealthy(self, item):
         self.levelObj.entityList.remove(item)
