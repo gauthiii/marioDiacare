@@ -16,8 +16,8 @@ class JumpTrait:
                 self.initalHeight = self.entity.rect.y
                 self.entity.inJump = True
                 self.entity.obeyGravity = False  # always reach maximum height
-                if self.dashboard.points >= 5:
-                    self.dashboard.points -=5
+                if self.dashboard.points >= 10:
+                    self.dashboard.points -=10
                 if self.dashboard.points1 <=2000:
                     self.dashboard.points1 += 100
 

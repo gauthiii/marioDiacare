@@ -27,10 +27,10 @@ class GoTrait:
 
         if self.direction != 0:
             self.heading = self.direction
-            if self.dashboard.points >=1:
-                self.dashboard.points -= 1
-            if self.dashboard.points1 >=1:
-                self.dashboard.points1 -= 1
+            if self.dashboard.points >=2:
+                self.dashboard.points -= 2
+            # if self.dashboard.points1 >=1:
+            #     self.dashboard.points1 -= 1
             if self.heading == 1:
                 if self.entity.vel.x < self.maxVel:
                     self.entity.vel.x += self.accelVel * self.heading

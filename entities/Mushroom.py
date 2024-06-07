@@ -51,7 +51,7 @@ class RedMushroom(EntityBase):
 
     def movePointsTextUpAndDraw(self, camera):
         self.textPos.y += -0.5
-        self.dashboard.drawText("100", self.textPos.x + camera.x, self.textPos.y, 8)
+        self.dashboard.drawText("INSULIN+++", self.textPos.x + camera.x, self.textPos.y, 8)
 
     def checkEntityCollision(self):
         pass

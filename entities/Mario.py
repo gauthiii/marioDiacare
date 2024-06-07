@@ -99,6 +99,8 @@ class Mario(EntityBase):
         self.levelObj.entityList.remove(item)
         if self.dashboard.points <= 2000:
             self.dashboard.points += 100
+        if self.dashboard.points1 <= 2000:
+            self.dashboard.points1 += 100
         self.dashboard.coins += 1
         self.sound.play_sfx(self.sound.coin)
 
@@ -127,12 +129,20 @@ class Mario(EntityBase):
         if not block.triggered:
             self.dashboard.coins += 1
             self.sound.play_sfx(self.sound.bump)
-            self.powerup(1)
+            if self.dashboard.points1 >= 200:
+                self.dashboard.points1 -= 200
+            if self.dashboard.points >= 200:
+                self.dashboard.points -= 200
+            # self.powerup(1)
         block.triggered = True
 
     def _onCollisionWithMob(self, mob, collisionState):
         if isinstance(mob, RedMushroom) and mob.alive:
             self.powerup(1)
+            if self.dashboard.points1 >= 350:
+                self.dashboard.points1 -= 350
+            if self.dashboard.points <= 2000:
+                self.dashboard.points += 100
             self.killEntity(mob)
             self.sound.play_sfx(self.sound.powerup)
         elif collisionState.isTop and (mob.alive or mob.bouncing):
@@ -180,7 +190,7 @@ class Mario(EntityBase):
             ent.active = False
             ent.bouncing = False
         if self.dashboard.points <= 2000:
-            self.dashboard.points += 500
+            self.dashboard.points += 200
 
     def gameOver(self):
         srf = pygame.Surface((640, 480))
@@ -219,3 +229,4 @@ class Mario(EntityBase):
                 self.traits['goTrait'].updateAnimation(bigAnimation)
                 self.rect = pygame.Rect(self.rect.x, self.rect.y-32, 32, 64)
                 self.invincibilityFrames = 20
+                # self.dashboard.drawText("INSULIN+++", self.rect.x + self.camera.x, self.rect.y, 8)

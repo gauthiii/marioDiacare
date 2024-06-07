@@ -22,6 +22,8 @@ class Dashboard(Font):
         self.glucose_text_rect = self.drawText("GLUCOSE", 50, 20, 15)
         self.drawProgressBar(50, 45, 100, 10,"glucose")  # Drawing the progress bar below the points (chnaged 60 to 45)
         # self.drawText(self.pointString(), 50, 37, 15)
+        if self.levelName != "":
+            self.drawText(str(int(self.points*100/2000))+" %", 160, 44, 13)
 
         # self.drawText("@x{}".format(self.coinString()), 215, 37, 15)
 
@@ -89,10 +91,7 @@ class Dashboard(Font):
             current_points = min(self.points1, self.max_points)
             fill_color = (255, 255, 0)  # Red
             fill_width = int((current_points / self.max_points) * width)
-            if current_points >= 1500:
-                fill_color = (255, 0, 0)  # Red
-            else:
-                fill_color = (255, 255, 0)  # Yellow
+            fill_color = (255, 255, 0)  # Yellow
         else:
             current_points = min(self.points, self.max_points)
             fill_color = (255, 255, 0)  # Yellow

@@ -177,7 +177,7 @@ class Menu:
         j = 0
         offset = 75
         textOffset = 90
-        names=["DIABETIC","PRE-DIABETIC","NON-DIABETIC"]
+        names=["BLOOD GLUCOSE MONITORING","PRE-DIABETIC","DIABETIC"]
         nin=0
         for i, levelName in enumerate(self.loadLevelNames()):
             if self.currSelectedLevel == i+1:
@@ -187,11 +187,15 @@ class Menu:
             if i < 3:
                 if nin<=2:
                     if len(names[nin])<=8:
-                        self.dashboard.drawText(names[nin], 175*i+textOffset, 110, 12)
+                        self.dashboard.drawText(names[nin], 175*i+textOffset, 120, 12)
+                    elif len(names[nin])<=12:
+                        self.dashboard.drawText(names[nin][0:4], 175*i+textOffset, 110, 12)
+                        self.dashboard.drawText(names[nin][4:], 175*i+textOffset, 110+20, 12)
                     else:
-                        self.dashboard.drawText(names[nin][0:4], 175*i+textOffset, 100, 12)
-                        self.dashboard.drawText(names[nin][4:], 175*i+textOffset, 100+20, 12)
-                    self.drawBorder(175*i+offset, 55, 125, 75, color, 5)
+                        self.dashboard.drawText(names[nin][0:5], 175*i+textOffset, 100, 12)
+                        self.dashboard.drawText(names[nin][6:13], 175*i+textOffset, 100+20, 12)
+                        self.dashboard.drawText(names[nin][14:], 175*i+textOffset, 100+20+20, 12)
+                    self.drawBorder(175*i+offset, 55, 145, 75, color, 5)
                     if nin<2:
                         nin+=1
             else:
