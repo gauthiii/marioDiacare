@@ -8,6 +8,7 @@ from entities.Coke import Coke
 from entities.Banana import Banana
 from entities.Broc import Broc
 from entities.CoinBrick import CoinBrick
+from entities.Flag import Flag
 from entities.Goomba import Goomba
 from entities.Mushroom import RedMushroom
 from entities.Koopa import Koopa
@@ -39,6 +40,7 @@ class Level:
             [self.addGoomba(x, y) for x, y in data["level"]["entities"]["Goomba"]]
             [self.addKoopa(x, y) for x, y in data["level"]["entities"]["Koopa"]]
             [self.addCoin(x, y) for x, y in data["level"]["entities"]["coin"]]
+            [self.addFlag(x, y) for x, y in data["level"]["entities"]["flag"]]
             [self.addBroc(x, y) for x, y in data["level"]["entities"]["broc"]]
             [self.addCoke(x, y) for x, y in data["level"]["entities"]["coke"]]
             [self.addBanana(x, y) for x, y in data["level"]["entities"]["banana"]]
@@ -181,6 +183,9 @@ class Level:
 
     def addCoin(self, x, y):
         self.entityList.append(Coin(self.screen, self.sprites.spriteCollection, x, y))
+
+    def addFlag(self, x, y):
+        self.entityList.append(Flag(self.screen, self.sprites.spriteCollection, x, y))
 
     def addCoke(self, x, y):
         self.entityList.append(Coke(self.screen, self.sprites.spriteCollection, x, y))

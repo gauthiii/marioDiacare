@@ -52,6 +52,8 @@ class Mario(EntityBase):
             "goTrait": GoTrait(smallAnimation, screen, self.camera, self,dashboard),
             "bounceTrait": bounceTrait(self),
         }
+        self.end_image = pygame.image.load('./img/Ending screen.png').convert_alpha()
+        self.end_image_rect = self.end_image.get_rect(center=(screen.get_width() / 2, screen.get_height() / 2))
 
         
         self.collision = Collider(self, level)
@@ -90,6 +92,8 @@ class Mario(EntityBase):
                     self._onCollisionWithMob(ent, collisionState)
                 elif ent.type == "Unhealthy":
                     self._onCollisionWithUnhealthy(ent)
+                elif ent.type == "End":
+                    self._onCollisionWithEnd(ent)
 
     def _onCollisionWithItem(self, item):
         # if item.name == "broc":
@@ -103,6 +107,18 @@ class Mario(EntityBase):
             self.dashboard.points1 += 100
         self.dashboard.coins += 1
         self.sound.play_sfx(self.sound.coin)
+
+    def _onCollisionWithEnd(self, item):
+        self.levelObj.entityList.remove(item)
+
+        self.sound.play_sfx(self.sound.powerup)
+
+        # Display the image at the center of the screen
+        self.screen.blit(self.end_image, self.end_image_rect)
+        pygame.display.update()
+
+        # Optionally, you might want to pause the game or wait for a user action to continue
+        pygame.time.wait(2000)  # Pause for 2000 milliseconds (2 seconds)
 
     def _onCollisionWithUnhealthy(self, item):
         self.levelObj.entityList.remove(item)

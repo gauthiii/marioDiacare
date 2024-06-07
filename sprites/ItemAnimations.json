@@ -28,6 +28,28 @@
             ],
             "deltaTime":10,
             "colorKey": -1
+        },
+        {
+            "name":"flag",
+            "images":[
+                {
+                    "x":8, 
+                    "y":0,
+                    "scale":2
+                },
+                {
+                    "x":8, 
+                    "y":0,
+                    "scale":2
+                },
+                {
+                    "x":8, 
+                    "y":0,
+                    "scale":2
+                }
+            ],
+            "deltaTime":10,
+            "colorKey": -1
         }
     ]
 }
