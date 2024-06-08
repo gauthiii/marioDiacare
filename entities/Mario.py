@@ -122,21 +122,20 @@ class Mario(EntityBase):
 
     def _onCollisionWithEnd(self, item):
         self.levelObj.entityList.remove(item)
-
         self.sound.play_sfx(self.sound.powerup)
 
-        # Display the image at the center of the screen
-        if self.dashboard.points<=1500:
-            self.screen.blit(self.end_image, self.end_image_rect)
-        elif self.dashboard.points>=500:
+        # Correctly display the image based on the score
+        if self.dashboard.points > 1500:
+            self.screen.blit(self.end_image1, self.end_image_rect1)
+        elif self.dashboard.points >= 500:
             self.screen.blit(self.end_image, self.end_image_rect)
         else:
-            self.screen.blit(self.end_image1, self.end_image_rect1)
-        pygame.display.update()
+            self.screen.blit(self.end_image1, self.end_image_rect1)  # Default case, can adjust as needed
 
-        # Optionally, you might want to pause the game or wait for a user action to continue
+        pygame.display.update()
         pygame.time.wait(2000)  # Pause for 2000 milliseconds (2 seconds)
         self.restart = True
+
 
     def _onCollisionWithUnhealthy(self, item):
         self.levelObj.entityList.remove(item)
