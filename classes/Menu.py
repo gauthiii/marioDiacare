@@ -10,6 +10,17 @@ class Menu:
     def __init__(self, screen, dashboard, level, sound):
         self.screen = screen
         self.sound = sound
+
+        self.popup_images = [
+            pygame.image.load("img/blood sugar managment (Popup1).png").convert_alpha(),
+            pygame.image.load("img/blood sugar managment (Popup2).png").convert_alpha(),
+            pygame.image.load("img/blood sugar managment (Popup3).png").convert_alpha(),
+            pygame.image.load("img/blood sugar managment (Popup4).png").convert_alpha()
+        ]
+        self.popup_index = 0
+        self.showing_popups = False
+
+
         self.start = False
         self.inSettings = False
         self.state = 0
@@ -49,16 +60,28 @@ class Menu:
 
     def update(self):
         self.checkInput()
-        if self.inChoosingLevel:
-            return
-
-        self.drawMenuBackground()
-        self.dashboard.update()
-
-        if not self.inSettings:
-            self.drawMenu()
+        if self.showing_popups:
+            self.displayPopup()
         else:
-            self.drawSettings()
+            if self.inChoosingLevel:
+                return
+
+            self.drawMenuBackground()
+            self.dashboard.update()
+
+            if not self.inSettings:
+                self.drawMenu()
+            else:
+                self.drawSettings()
+
+    def displayPopup(self):
+        # Display the current popup image
+        self.screen.fill((0, 0, 0))  # Clear the screen or fill it with a background
+        current_image = self.popup_images[self.popup_index]
+        current_image = pygame.transform.scale(current_image, (640, 480))
+        image_rect = current_image.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+        self.screen.blit(current_image, image_rect)
+        pygame.display.update()
 
     def drawDot(self):
         if self.state == 0:
@@ -232,7 +255,28 @@ class Menu:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
+                if self.showing_popups:
+                    if event.key == pygame.K_RIGHT or event.key == pygame.K_RETURN:
+                        if self.popup_index < len(self.popup_images) - 1:
+                            self.popup_index += 1
+                        else:
+                            self.inChoosingLevel = False
+                            self.dashboard.state = "start"
+                            self.dashboard.time = 0
+                            self.level.loadLevel(self.levelNames[self.currSelectedLevel-1])
+                            self.dashboard.levelName = self.levelNames[self.currSelectedLevel-1].split("Level")[1]
+                            self.start = True 
+                            print("start")
+                    if event.key == pygame.K_LEFT:
+                        if self.popup_index >0:
+                            self.popup_index -= 1
+                        else:
+                            self.showing_popups=False
+                            self.chooseLevel()
                 if event.key == pygame.K_ESCAPE:
+                    if self.showing_popups:
+                        print("f")
+                        self.showing_popups=False
                     if self.inChoosingLevel or self.inSettings:
                         self.inChoosingLevel = False
                         self.inSettings = False
@@ -255,21 +299,23 @@ class Menu:
                     if self.state < 3:
                         self.state += 1
                 elif event.key == pygame.K_LEFT or event.key == pygame.K_h:
-                    if self.currSelectedLevel > 1:
+                    if self.currSelectedLevel > 1 and self.showing_popups==False:
                         self.currSelectedLevel -= 1
                         self.drawLevelChooser()
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_l:
-                    if self.currSelectedLevel < self.levelCount:
+                    if self.currSelectedLevel < self.levelCount and self.showing_popups==False:
                         self.currSelectedLevel += 1
                         self.drawLevelChooser()
                 elif event.key == pygame.K_RETURN:
                     if self.inChoosingLevel:
-                        self.inChoosingLevel = False
-                        self.dashboard.state = "start"
-                        self.dashboard.time = 0
-                        self.level.loadLevel(self.levelNames[self.currSelectedLevel-1])
-                        self.dashboard.levelName = self.levelNames[self.currSelectedLevel-1].split("Level")[1]
-                        self.start = True
+                        # self.inChoosingLevel = False
+                        # self.dashboard.state = "start"
+                        # self.dashboard.time = 0
+                        # self.level.loadLevel(self.levelNames[self.currSelectedLevel-1])
+                        # self.dashboard.levelName = self.levelNames[self.currSelectedLevel-1].split("Level")[1]
+                        self.showing_popups = True
+                        # print(self.currSelectedLevel-1)
+                        # self.start = True
                         return
                     if not self.inSettings:
                         if self.state == 0:
