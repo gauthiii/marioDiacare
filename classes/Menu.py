@@ -21,6 +21,16 @@ class Menu:
         self.showing_popups = False
 
 
+        self.popup_images1 = [
+            pygame.image.load("img/Learn Dc1.png").convert_alpha(),
+            pygame.image.load("img/Learn Dc2.png").convert_alpha(),
+            pygame.image.load("img/Learn Dc3.png").convert_alpha(),
+            pygame.image.load("img/Learn Dc4.png").convert_alpha()
+        ]
+        self.popup_index1 = 0
+        self.showing_popups1 = False
+
+
         self.start = False
         self.inSettings = False
         self.state = 0
@@ -62,7 +72,10 @@ class Menu:
         self.checkInput()
         if self.showing_popups:
             self.displayPopup()
+        elif self.showing_popups1:
+            self.displayPopup1()
         else:
+
             if self.inChoosingLevel:
                 return
 
@@ -78,6 +91,15 @@ class Menu:
         # Display the current popup image
         self.screen.fill((0, 0, 0))  # Clear the screen or fill it with a background
         current_image = self.popup_images[self.popup_index]
+        current_image = pygame.transform.scale(current_image, (640, 480))
+        image_rect = current_image.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+        self.screen.blit(current_image, image_rect)
+        pygame.display.update()
+
+    def displayPopup1(self):
+        # Display the current popup image
+        self.screen.fill((0, 0, 0))  # Clear the screen or fill it with a background
+        current_image = self.popup_images1[self.popup_index1]
         current_image = pygame.transform.scale(current_image, (640, 480))
         image_rect = current_image.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
         self.screen.blit(current_image, image_rect)
@@ -254,72 +276,80 @@ class Menu:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
             if event.type == pygame.KEYDOWN:
-                if self.showing_popups:
-                    if event.key == pygame.K_RIGHT or event.key == pygame.K_RETURN:
-                        if self.popup_index < len(self.popup_images) - 1:
-                            self.popup_index += 1
-                        else:
-                            self.inChoosingLevel = False
-                            self.dashboard.state = "start"
-                            self.dashboard.time = 0
-                            self.level.loadLevel(self.levelNames[self.currSelectedLevel-1])
-                            self.dashboard.levelName = self.levelNames[self.currSelectedLevel-1].split("Level")[1]
-                            self.start = True 
-                            print("start")
-                    if event.key == pygame.K_LEFT:
-                        if self.popup_index >0:
-                            self.popup_index -= 1
-                        else:
-                            self.showing_popups=False
-                            self.chooseLevel()
+                # Handle ESC to close the game or popups, or go back from settings or level choosing
                 if event.key == pygame.K_ESCAPE:
                     if self.showing_popups:
-                        print("f")
                         self.showing_popups=False
-                    if self.inChoosingLevel or self.inSettings:
-                        self.inChoosingLevel = False
-                        self.inSettings = False
+                        self.chooseLevel()
+                    elif self.showing_popups1:
+                        self.showing_popups1 = False
+                    elif self.inChoosingLevel or self.inSettings:
+                        self.inChoosingLevel = self.inSettings = False
                         self.__init__(self.screen, self.dashboard, self.level, self.sound)
                     else:
                         pygame.quit()
                         sys.exit()
-                elif event.key == pygame.K_UP or event.key == pygame.K_k:
-                    if self.inChoosingLevel:
-                        if self.currSelectedLevel > 3:
+
+                # Manage navigation through popups
+                if self.showing_popups1:
+                    if event.key in (pygame.K_RIGHT, pygame.K_RETURN):
+                        if self.popup_index1 < len(self.popup_images1) - 1:
+                            self.popup_index1 += 1
+                        else:
+                            self.showing_popups1 = False
+                            self.popup_index1 = 0
+                    elif event.key == pygame.K_LEFT:
+                        if self.popup_index1 > 0:
+                            self.popup_index1 -= 1
+                        else:
+                            self.showing_popups1 = False
+
+                if self.showing_popups:
+                    if event.key in (pygame.K_RIGHT, pygame.K_RETURN):
+                        if self.popup_index < len(self.popup_images) - 1:
+                            self.popup_index += 1
+                        else:
+                            self.startGame()
+                    elif event.key == pygame.K_LEFT:
+                        if self.popup_index > 0:
+                            self.popup_index -= 1
+                        else:
+                            self.showing_popups = False
+                            self.chooseLevel()
+
+                # Navigation in menu and levels
+                if not self.showing_popups and not self.showing_popups1:
+                    if event.key == pygame.K_UP or event.key == pygame.K_k:
+                        if self.inChoosingLevel and self.currSelectedLevel > 3:
                             self.currSelectedLevel -= 3
                             self.drawLevelChooser()
-                    if self.state > 0:
-                        self.state -= 1
-                elif event.key == pygame.K_DOWN or event.key == pygame.K_j:
-                    if self.inChoosingLevel:
-                        if self.currSelectedLevel+3 <= self.levelCount:
+                        elif self.state > 0:
+                            self.state -= 1
+
+                    elif event.key == pygame.K_DOWN or event.key == pygame.K_j:
+                        if self.inChoosingLevel and self.currSelectedLevel + 3 <= self.levelCount:
                             self.currSelectedLevel += 3
                             self.drawLevelChooser()
-                    if self.state < 3:
-                        self.state += 1
-                elif event.key == pygame.K_LEFT or event.key == pygame.K_h:
-                    if self.currSelectedLevel > 1 and self.showing_popups==False:
-                        self.currSelectedLevel -= 1
-                        self.drawLevelChooser()
-                elif event.key == pygame.K_RIGHT or event.key == pygame.K_l:
-                    if self.currSelectedLevel < self.levelCount and self.showing_popups==False:
-                        self.currSelectedLevel += 1
-                        self.drawLevelChooser()
-                elif event.key == pygame.K_RETURN:
-                    if self.inChoosingLevel:
-                        # self.inChoosingLevel = False
-                        # self.dashboard.state = "start"
-                        # self.dashboard.time = 0
-                        # self.level.loadLevel(self.levelNames[self.currSelectedLevel-1])
-                        # self.dashboard.levelName = self.levelNames[self.currSelectedLevel-1].split("Level")[1]
-                        self.showing_popups = True
-                        # print(self.currSelectedLevel-1)
-                        # self.start = True
-                        return
-                    if not self.inSettings:
-                        if self.state == 0:
-                            self.chooseLevel()
+                        elif self.state < 3:
+                            self.state += 1
+
+                    elif event.key == pygame.K_LEFT or event.key == pygame.K_h:
+                        if self.currSelectedLevel > 1:
+                            self.currSelectedLevel -= 1
+                            self.drawLevelChooser()
+
+                    elif event.key == pygame.K_RIGHT or event.key == pygame.K_l:
+                        if self.currSelectedLevel < self.levelCount:
+                            self.currSelectedLevel += 1
+                            self.drawLevelChooser()
+
+                    elif event.key == pygame.K_RETURN:
+                        if self.inChoosingLevel:
+                            self.showing_popups = True
+                        elif self.state == 0:
+                            self.showing_popups1 = True
                         elif self.state == 1:
                             self.chooseLevel()
                         elif self.state == 2:
@@ -328,23 +358,33 @@ class Menu:
                         elif self.state == 3:
                             pygame.quit()
                             sys.exit()
-                    else:
-                        if self.state == 0:
-                            if self.music:
-                                self.sound.music_channel.stop()
-                                self.music = False
-                            else:
-                                self.sound.music_channel.play(self.sound.soundtrack, loops=-1)
-                                self.music = True
-                            self.saveSettings("./settings.json")
-                        elif self.state == 1:
-                            if self.sfx:
-                                self.sound.allowSFX = False
-                                self.sfx = False
-                            else:
-                                self.sound.allowSFX = True
-                                self.sfx = True
-                            self.saveSettings("./settings.json")
-                        elif self.state == 2:
-                            self.inSettings = False
+                # Handle settings changes
+                if self.inSettings:
+                    self.handleSettingsChanges(event)
+
         pygame.display.update()
+
+    def startGame(self):
+        self.inChoosingLevel = False
+        self.showing_popups = False
+        self.dashboard.state = "start"
+        self.dashboard.time = 0
+        self.level.loadLevel(self.levelNames[self.currSelectedLevel-1])
+        self.dashboard.levelName = self.levelNames[self.currSelectedLevel-1].split("Level")[1]
+        self.start = True
+
+    def handleSettingsChanges(self, event):
+        if event.key == pygame.K_RETURN:
+            if self.state == 0:
+                self.music = not self.music
+                if self.music:
+                    self.sound.music_channel.play(self.sound.soundtrack, loops=-1)
+                else:
+                    self.sound.music_channel.stop()
+            elif self.state == 1:
+                self.sfx = not self.sfx
+                self.sound.allowSFX = self.sfx
+            self.saveSettings("./settings.json")
+            if self.state == 2:
+                self.inSettings = False
+
