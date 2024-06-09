@@ -27,8 +27,8 @@ class GoTrait:
 
         if self.direction != 0:
             self.heading = self.direction
-            if self.dashboard.points >=2:
-                self.dashboard.points -= 2
+            if self.dashboard.points >=0.5:
+                self.dashboard.points -= 0.5
             # if self.dashboard.points1 >=1:
             #     self.dashboard.points1 -= 1
             if self.heading == 1:

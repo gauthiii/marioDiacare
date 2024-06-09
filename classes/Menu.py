@@ -21,6 +21,10 @@ class Menu:
         self.inChoosingLevel = False
         self.dashboard = dashboard
         self.levelCount = 0
+        
+        self.learn_image = pygame.image.load("./img/Learn Dc1.png").convert_alpha()
+        self.learn_image_rect = self.learn_image.get_rect(center=(self.screen.get_width() // 2, self.screen.get_height() // 2))
+
         self.spritesheet = Spritesheet("./img/title_screen.png")
         self.menu_banner = self.spritesheet.image_at(
             0,
@@ -61,19 +65,23 @@ class Menu:
             self.screen.blit(self.menu_dot, (145, 263))
             self.screen.blit(self.menu_dot2, (145, 303))
             self.screen.blit(self.menu_dot2, (145, 343))
-            self.screen.blit(self.menu_dot2, (145, 383))
+            if not self.inSettings:
+                self.screen.blit(self.menu_dot2, (145, 383))
         elif self.state == 1:
             self.screen.blit(self.menu_dot, (145, 303))
             self.screen.blit(self.menu_dot2, (145, 263))
             self.screen.blit(self.menu_dot2, (145, 343))
-            self.screen.blit(self.menu_dot2, (145, 383))
+            if not self.inSettings:
+                self.screen.blit(self.menu_dot2, (145, 383))
         elif self.state == 2:
             self.screen.blit(self.menu_dot, (145, 343))
             self.screen.blit(self.menu_dot2, (145, 263))
             self.screen.blit(self.menu_dot2, (145, 303))
-            self.screen.blit(self.menu_dot2, (145, 383))
+            if not self.inSettings:
+                self.screen.blit(self.menu_dot2, (145, 383))
         elif self.state == 3:
-            self.screen.blit(self.menu_dot, (145, 383))
+            if not self.inSettings:
+                self.screen.blit(self.menu_dot, (145, 383))
             self.screen.blit(self.menu_dot2, (145, 263))
             self.screen.blit(self.menu_dot2, (145, 303))
             self.screen.blit(self.menu_dot2, (145, 343))
