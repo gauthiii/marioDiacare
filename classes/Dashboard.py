@@ -5,7 +5,9 @@ from classes.Font import Font
 
 class Dashboard(Font):
     def __init__(self, filePath, size, screen,max_points=2000):
-        Font.__init__(self, filePath, size)
+        # Font.__init__(self, filePath.split(":")[0], size)
+        self.filePath=filePath
+        self.fsize=size
         self.state = "menu"
         self.screen = screen
         self.levelName = ""
@@ -21,17 +23,17 @@ class Dashboard(Font):
 
     def update(self):
         self.glucose_text_rect = self.drawText("GLUCOSE", 50, 20, 15)
-        self.drawProgressBar(50, 45, 100, 10,"glucose")  # Drawing the progress bar below the points (chnaged 60 to 45)
+        self.drawProgressBar(50, 45, 100, 15,"glucose")  # Drawing the progress bar below the points (chnaged 60 to 45)
         # self.drawText(self.pointString(), 50, 37, 15)
         if self.levelName != "":
-            self.drawText(str(int(self.points*100/2000))+" %", 160, 44, 13)
+            self.drawText(str(int(self.points*100/2000))+" %", 160, 46, 13)
 
             
 
         # self.drawText("@x{}".format(self.coinString()), 215, 37, 15)
 
         self.insulin_text_rect = self.drawText("INSULIN", 480, 20, 15)
-        self.drawProgressBar(483, 45, 100, 10,"insulin") 
+        self.drawProgressBar(485, 45, 100, 15,"insulin") 
         # self.drawText(str(self.points), 395, 37, 15)
 
         if (self.points>1500):
@@ -61,7 +63,11 @@ class Dashboard(Font):
     #             x += size
 
 
-    def drawText(self, text, x, y, size):
+    def drawText(self, text, x, y, size, use_default_font=True):
+        if use_default_font:
+            Font.__init__(self, self.filePath.split(":")[0], self.fsize)
+        else:
+            Font.__init__(self, self.filePath.split(":")[1], self.fsize)
         bounds = pygame.Rect(x, y, 0, size)  # Initialize the bounds of the text
         for char in text:
             charSprite = pygame.transform.scale(self.charSprites[char], (size, size))
@@ -74,35 +80,36 @@ class Dashboard(Font):
         return bounds
 
 
-    def drawProgressBar(self, x, y, width, height,text):
-        # Draw background of the progress bar
-        background_color = (50, 50, 50)  # Dark gray
-        pygame.draw.rect(self.screen, background_color, [x, y, width, height])
+    def drawProgressBar(self, x, y, width, height, text):
+        # Create a transparent surface
+        # bar_surface = pygame.Surface((width, height))
+        # bar_surface.set_alpha(128)  # Adjust alpha to your preference of transparency
+        # bar_surface.fill((50, 50, 50))  # Dark gray, semi-transparent background
+        # self.screen.blit(bar_surface, (x, y))
 
         # Ensure that points do not exceed max_points
-        current_points = min(self.points, self.max_points)
+        current_points = min(self.points, self.max_points) if text != "insulin" else min(self.points1, self.max_points)
 
         # Calculate width of the filled part
-        fill_width = 0
-        fill_color=(0,0,0)
-        if text=="glucose":
-            current_points = min(self.points, self.max_points)
-            fill_color = (0, 255, 0)  # Green
-            fill_width = int((current_points / self.max_points) * width)
+        fill_width = int((current_points / self.max_points) * width)
+        fill_color = (0, 255, 0)  # Default green for glucose
+
+        if text == "glucose":
             if current_points >= 1500:
-                fill_color = (255, 0, 0)  # Red
-            else:
-                fill_color = (0, 255, 0)  # Green
-        elif text=="insulin":
-            current_points = min(self.points1, self.max_points)
-            fill_color = (255, 255, 0)  # Red
-            fill_width = int((current_points / self.max_points) * width)
-            fill_color = (255, 255, 0)  # Yellow
+                fill_color = (255, 0, 0)  # Red for high glucose
+        elif text == "insulin":
+            fill_color = (255, 255, 0)  # Yellow for insulin
         else:
-            current_points = min(self.points, self.max_points)
-            fill_color = (255, 255, 0)  # Yellow
-            fill_width = int((current_points / self.max_points) * width)*0.4
+            fill_color = (255, 255, 0)  # Yellow for default case, adjust if necessary
+
+        # Draw the filled part
         pygame.draw.rect(self.screen, fill_color, [x, y, fill_width, height])
+
+        # Draw a white border around the progress bar
+        border_color = (255, 255, 255)  # White color for the border
+        border_rect = pygame.Rect(x, y, width, height)
+        pygame.draw.rect(self.screen, border_color, border_rect, 2)  # '2' is the thickness of the border
+
         
 
 

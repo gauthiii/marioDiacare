@@ -57,6 +57,8 @@ class Koopa(EntityBase):
         self.drawKoopa(camera)
         self.leftrightTrait.update()
 
+    
+
     def sleepingInShell(self, camera):
         if self.timer < self.timeAfterDeath:
             self.screen.blit(

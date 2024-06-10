@@ -60,7 +60,7 @@ class Goomba(EntityBase):
 
     def movePointsTextUpAndDraw(self, camera):
         self.textPos.y += -0.5
-        self.dashboard.drawText("UNHEALTHY!!", self.textPos.x + camera.x, self.textPos.y, 8)
+        self.dashboard.drawText("UNHEALTHY!!", self.textPos.x + camera.x, self.textPos.y, 8,False)
     
     def checkEntityCollision(self):
         for ent in self.levelObj.entityList:

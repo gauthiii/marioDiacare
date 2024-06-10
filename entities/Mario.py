@@ -125,9 +125,9 @@ class Mario(EntityBase):
         self.sound.play_sfx(self.sound.powerup)
 
         # Correctly display the image based on the score
-        if self.dashboard.points > 1500:
+        if self.dashboard.points > 1200:
             self.screen.blit(self.end_image1, self.end_image_rect1)
-        elif self.dashboard.points >= 500:
+        elif self.dashboard.points >= 800:
             self.screen.blit(self.end_image, self.end_image_rect)
         else:
             self.screen.blit(self.end_image1, self.end_image_rect1)  # Default case, can adjust as needed
