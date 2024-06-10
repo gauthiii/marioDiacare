@@ -306,6 +306,7 @@ class Menu:
                         else:
                             self.showing_popups1 = False
                     continue
+                    
 
                 if self.showing_popups:
                     if event.key in (pygame.K_RIGHT, pygame.K_RETURN):
@@ -350,15 +351,21 @@ class Menu:
                         if self.inChoosingLevel:
                             self.showing_popups = True
                         elif self.state == 0:
-                            self.showing_popups1 = True
+                            if self.inSettings == False:
+                                self.showing_popups1 = True
+                            
                         elif self.state == 1:
-                            self.chooseLevel()
+                            if self.inSettings == False:
+                                self.chooseLevel()
                         elif self.state == 2:
-                            self.inSettings = True
-                            self.state = 0
+                            if self.inSettings == False:
+                                self.state = 0
+                                self.inSettings = True
+                                
                         elif self.state == 3:
-                            pygame.quit()
-                            sys.exit()
+                            if self.inSettings == False:
+                                pygame.quit()
+                                sys.exit()
                 # Handle settings changes
                 if self.inSettings:
                     self.handleSettingsChanges(event)
