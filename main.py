@@ -18,6 +18,11 @@ def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
     
     clock = pygame.time.Clock()
     char_interval = 200  # Time in milliseconds to wait before showing the next character
+    mariox=2*32
+    marioy=12*32
+
+    koopax=17*32
+    koopay=11*32
 
     for i in range(len(full_text) + 1):
         while pygame.time.get_ticks() % char_interval > 100:  # Minor loop to delay until the next interval
@@ -40,6 +45,10 @@ def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
         for y in range(13, 15):
             for x in range(0, 20):
                 screen.blit(level.sprites.spriteCollection.get("ground").image, (x * 32, y * 32))
+
+        
+        screen.blit(level.sprites.spriteCollection.get("mario_idle").image, (mariox, marioy))
+        screen.blit(level.sprites.spriteCollection.get("koopa-2").image, (koopax, koopay))
 
         screen.blit(text_surface, text_rect)  # Blit the current portion of the text
         pygame.display.update()  # Update the entire screen to reflect changes
@@ -81,6 +90,9 @@ def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
         for y in range(13, 15):
             for x in range(0, 20):
                 screen.blit(level.sprites.spriteCollection.get("ground").image, (x * 32, y * 32))
+        
+        screen.blit(level.sprites.spriteCollection.get("mario_idle").image, (mariox, marioy))
+        screen.blit(level.sprites.spriteCollection.get("koopa-2").image, (koopax, koopay))
 
         screen.blit(text_surface, text_rect)  # Blit the current portion of the text
         pygame.display.update()  # Update the entire screen to reflect changes
