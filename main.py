@@ -7,6 +7,8 @@ from entities.Mario import Mario
 from config import SCALED_WIDTH, SCALED_HEIGHT
 import sys
 
+# Global flag to determine if the loading screen should be shown
+first_run = True
 
 def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
     font = pygame.font.Font('SuperMario256.ttf', 24)  # Create a font object with a specified font and size
@@ -115,6 +117,7 @@ def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
 
 
 def main():
+    global first_run
     pygame.mixer.pre_init(44100, -16, 2, 4096)
     pygame.init()
     screen = pygame.display.set_mode((SCALED_WIDTH, SCALED_HEIGHT))
@@ -122,7 +125,11 @@ def main():
     dashboard = Dashboard("./img/font.png:./img/font-red.png", 8, screen)
     
     level = Level(screen, sound, dashboard)
-    show_loading_screen(screen,SCALED_WIDTH, SCALED_HEIGHT,level,sound)  # Call the loading screen function
+
+    if first_run:
+        show_loading_screen(screen, SCALED_WIDTH, SCALED_HEIGHT, level, sound)
+        first_run = False  # Set the flag to False after the first run
+        
     max_frame_rate = 60
     
     menu = Menu(screen, dashboard, level, sound)
