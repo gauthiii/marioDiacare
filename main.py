@@ -60,7 +60,7 @@ def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
 
     pygame.time.delay(800) 
 
-    full_text = "Developed by Ashika Ramesh"
+    full_text = "Designed by Ashika Ramesh"
     displayed_text = ""  # Start with an empty string and build it up character by character
 
     text_surface = font.render("", True, (255, 255, 255))
