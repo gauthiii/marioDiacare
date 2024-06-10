@@ -305,6 +305,7 @@ class Menu:
                             self.popup_index1 -= 1
                         else:
                             self.showing_popups1 = False
+                    continue
 
                 if self.showing_popups:
                     if event.key in (pygame.K_RIGHT, pygame.K_RETURN):
