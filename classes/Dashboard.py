@@ -11,7 +11,9 @@ class Dashboard(Font):
         self.state = "menu"
         self.screen = screen
         self.levelName = ""
-        self.points = 700
+        #glucose
+        self.points = 1010
+        #insulin
         self.points1 = 1200
         self.points2 = 0
         self.coins = 0

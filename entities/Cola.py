@@ -5,16 +5,16 @@ import pygame
 from entities.EntityBase import EntityBase
 
 
-class Coke(EntityBase):
+class Cola(EntityBase):
     def __init__(self, screen, spriteCollection, x, y, gravity=0):
-        super(Coke, self).__init__(x, y, gravity)
+        super(Cola, self).__init__(x, y, gravity)
         self.screen = screen
         self.spriteCollection = spriteCollection
         self.animation = copy(self.spriteCollection.get("coke").animation)
-        self.anIm = pygame.image.load('./img/pizza.png').convert_alpha()
+        self.anIm = pygame.image.load('./img/cola.png').convert_alpha()
         self.anIm_scale = pygame.transform.scale(self.anIm, (32, 32))
 
-        self.type = "Unhealthy"
+        self.type = "Item"
 
     def update(self, cam):
         if self.alive:

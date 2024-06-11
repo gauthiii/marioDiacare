@@ -106,7 +106,8 @@ class Mario(EntityBase):
                     self._onCollisionWithUnhealthy(ent)
                 elif ent.type == "End":
                     self._onCollisionWithEnd(ent)
-
+    
+    # apple or grapes or brocoli
     def _onCollisionWithItem(self, item):
         # if item.name == "broc":
         #     self.show_text_animation("Healthy", self.getPos())
@@ -169,6 +170,7 @@ class Mario(EntityBase):
             # self.powerup(1)
         block.triggered = True
 
+    # burger or coke
     def _onCollisionWithMob(self, mob, collisionState):
         if isinstance(mob, RedMushroom) and mob.alive:
             self.powerup(1)
