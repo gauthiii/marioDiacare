@@ -54,10 +54,13 @@ class Goomba(EntityBase):
         self.timer += 0.1
 
     def drawFlatGoomba(self, camera):
-        self.screen.blit(
-            self.spriteCollection.get("goomba-flat").image,
-            (self.rect.x + camera.x, self.rect.y),
-        )
+        self.anIm = pygame.image.load('./img/icons/Burger crushed.png').convert_alpha()
+        self.anIm_scale = pygame.transform.scale(self.anIm, (32*2, 32))
+        self.screen.blit(self.anIm_scale, (self.rect.x + camera.x - 24, self.rect.y))
+        # self.screen.blit(
+        #     self.spriteCollection.get("goomba-flat").image,
+        #     (self.rect.x + camera.x, self.rect.y),
+        # )
 
     def setPointsTextStartPosition(self, x, y):
         self.textPos = Vec2D(x, y)
