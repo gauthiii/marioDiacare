@@ -1,3 +1,8 @@
+# Super Mario DiaCare
+
+![gaming mario](https://github.com/gauthiii/marioDiacare/assets/35861219/587ccf4e-81f0-419a-8761-7ab07b9ff060)
+
+
 # Super Mario Implementation in Python
 
 This is inspired by Meth-Meth-Method's [super mario game](https://github.com/meth-meth-method/super-mario/)
