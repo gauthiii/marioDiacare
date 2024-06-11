@@ -22,10 +22,10 @@ class Menu:
 
 
         self.popup_images1 = [
-            pygame.image.load("img/Learn Dc1.png").convert_alpha(),
-            pygame.image.load("img/Learn Dc2.png").convert_alpha(),
             pygame.image.load("img/Learn Dc3.png").convert_alpha(),
-            pygame.image.load("img/Learn Dc4.png").convert_alpha()
+            pygame.image.load("img/Learn Dc4.png").convert_alpha(),
+            pygame.image.load("img/Learn Dc1.png").convert_alpha(),
+            pygame.image.load("img/Learn Dc2.png").convert_alpha()
         ]
         self.popup_index1 = 0
         self.showing_popups1 = False
