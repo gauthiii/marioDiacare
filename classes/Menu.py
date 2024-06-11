@@ -198,7 +198,7 @@ class Menu:
         self.screen.blit(
             self.level.sprites.spriteCollection.get("bush_3").image, (17 * 32, 12 * 32)
         )
-        self.screen.blit(pygame.transform.scale(pygame.image.load('./img/burger.png').convert_alpha(), (32, 32)), (18*32, 12*32))
+        self.screen.blit(pygame.transform.scale(pygame.image.load('./img/icons/Burger.png').convert_alpha(), (32*1.5, 32*1.5)), (17.5*32, 12*32-16))
 
         
 

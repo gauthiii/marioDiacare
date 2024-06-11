@@ -37,9 +37,9 @@ class Goomba(EntityBase):
             self.onDead(camera)
 
     def drawGoomba(self, camera):
-        self.anIm = pygame.image.load('./img/burger.png').convert_alpha()
-        self.anIm_scale = pygame.transform.scale(self.anIm, (32, 32))
-        self.screen.blit(self.anIm_scale, (self.rect.x + camera.x, self.rect.y))
+        self.anIm = pygame.image.load('./img/icons/Burger.png').convert_alpha()
+        self.anIm_scale = pygame.transform.scale(self.anIm, (32*1.5, 32*1.5))
+        self.screen.blit(self.anIm_scale, (self.rect.x + camera.x - 12, self.rect.y-16))
         # self.screen.blit(self.animation.image, (self.rect.x + camera.x, self.rect.y))
         self.animation.update()
 

@@ -56,7 +56,7 @@ class Koopa1(EntityBase):
     def drawFlatGoomba(self, camera):
         self.anIm = pygame.image.load('./img/icons/Crushed Can.png').convert_alpha()
         self.anIm_scale = pygame.transform.scale(self.anIm, (32*1.8, 32*2))
-        self.screen.blit(self.anIm_scale, (self.rect.x + camera.x - 24, self.rect.y-32))
+        self.screen.blit(self.anIm_scale, (self.rect.x + camera.x - 12, self.rect.y-32))
         # self.screen.blit(
         #     self.spriteCollection.get("goomba-flat").image,
         #     (self.rect.x + camera.x, self.rect.y),
