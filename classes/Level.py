@@ -11,6 +11,7 @@ from entities.CoinBrick import CoinBrick
 from entities.Cola import Cola
 from entities.Flag import Flag
 from entities.Goomba import Goomba
+from entities.Koopa1 import Koopa1
 from entities.Mushroom import RedMushroom
 from entities.Koopa import Koopa
 from entities.CoinBox import CoinBox
@@ -221,7 +222,7 @@ class Level:
 
     def addKoopa(self, x, y):
         self.entityList.append(
-            Koopa(self.screen, self.sprites.spriteCollection, x, y, self, self.sound)
+            Koopa1(self.screen, self.sprites.spriteCollection, x, y, self, self.sound)
         )
 
     def addRedMushroom(self, x, y):

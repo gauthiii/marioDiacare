@@ -184,7 +184,10 @@ class Menu:
             (2 * 32, 12 * 32),
         )
         self.screen.blit(
-            self.level.sprites.spriteCollection.get("bush_1").image, (14 * 32, 12 * 32)
+            self.level.sprites.spriteCollection.get("bush_1").image, (13 * 32, 12 * 32)
+        )
+        self.screen.blit(
+            self.level.sprites.spriteCollection.get("bush_2").image, (14 * 32, 12 * 32)
         )
         self.screen.blit(
             self.level.sprites.spriteCollection.get("bush_2").image, (15 * 32, 12 * 32)
@@ -193,12 +196,11 @@ class Menu:
             self.level.sprites.spriteCollection.get("bush_2").image, (16 * 32, 12 * 32)
         )
         self.screen.blit(
-            self.level.sprites.spriteCollection.get("bush_2").image, (17 * 32, 12 * 32)
+            self.level.sprites.spriteCollection.get("bush_3").image, (17 * 32, 12 * 32)
         )
-        self.screen.blit(
-            self.level.sprites.spriteCollection.get("bush_3").image, (18 * 32, 12 * 32)
-        )
-        self.screen.blit(self.level.sprites.spriteCollection.get("goomba-1").image, (18.5*32, 12*32))
+        self.screen.blit(pygame.transform.scale(pygame.image.load('./img/burger.png').convert_alpha(), (32, 32)), (18*32, 12*32))
+
+        
 
     def drawSettings(self):
         self.drawDot()

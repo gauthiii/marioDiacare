@@ -50,7 +50,7 @@ def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
 
         
         screen.blit(level.sprites.spriteCollection.get("mario_idle").image, (mariox, marioy))
-        screen.blit(level.sprites.spriteCollection.get("koopa-2").image, (koopax, koopay))
+        screen.blit(pygame.transform.scale(pygame.image.load('./img/icons/Coke.png').convert_alpha(), (32*2, 32*2)), (koopax, koopay))
 
         screen.blit(text_surface, text_rect)  # Blit the current portion of the text
         pygame.display.update()  # Update the entire screen to reflect changes
@@ -94,7 +94,7 @@ def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
                 screen.blit(level.sprites.spriteCollection.get("ground").image, (x * 32, y * 32))
         
         screen.blit(level.sprites.spriteCollection.get("mario_idle").image, (mariox, marioy))
-        screen.blit(level.sprites.spriteCollection.get("koopa-2").image, (koopax, koopay))
+        screen.blit(pygame.transform.scale(pygame.image.load('./img/icons/Coke.png').convert_alpha(), (32*2, 32*2)), (koopax, koopay))
 
         screen.blit(text_surface, text_rect)  # Blit the current portion of the text
         pygame.display.update()  # Update the entire screen to reflect changes
@@ -142,6 +142,9 @@ def main():
 
     while not mario.restart:
         pygame.display.set_caption(f"Super Mario running with {int(clock.get_fps()):d} FPS")
+        # if mario.speed:
+        #     print("SSSLLOOOOOOOWWWWWWW")
+        #     max_frame_rate = 30
         if mario.pause:
             mario.pauseObj.update()
         else:

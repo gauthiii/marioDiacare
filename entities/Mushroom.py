@@ -36,7 +36,7 @@ class RedMushroom(EntityBase):
 
     def drawRedMushroom(self, camera):
         self.anIm = pygame.image.load('./img/icons/Insulin.png').convert_alpha()
-        self.anIm_scale = pygame.transform.scale(self.anIm, (32*1.1, 32*1.1))
+        self.anIm_scale = pygame.transform.scale(self.anIm, (32*1.5, 32*1.1))
         self.screen.blit(self.anIm_scale, (self.rect.x + camera.x, self.rect.y))
         # self.screen.blit(self.animation.image, (self.rect.x + camera.x, self.rect.y))
         self.animation.update()

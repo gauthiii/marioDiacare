@@ -75,6 +75,7 @@ class Mario(EntityBase):
         self.restart = False
         self.pause = False
         self.pauseObj = Pause(screen, self, dashboard)
+        self.speed = False
 
     def update(self):
         if self.invincibilityFrames > 0:
@@ -203,7 +204,11 @@ class Mario(EntityBase):
                 self.sound.play_sfx(self.sound.kick)
         elif collisionState.isColliding and mob.alive and not self.invincibilityFrames:
             if self.powerUpState == 0:
-                self.gameOver()
+                self.sound.play_sfx(self.sound.stomp)
+                self.killEntity(mob)
+                # self.gameOver()
+                self.speed = True
+                print("gameover")
             elif self.powerUpState == 1:
                 self.powerUpState = 0
                 self.traits['goTrait'].updateAnimation(smallAnimation)
@@ -219,11 +224,12 @@ class Mario(EntityBase):
         if ent.__class__.__name__ != "Koopa":
             ent.alive = False
         else:
-            ent.timer = 0
-            ent.leftrightTrait.speed = 1
-            ent.alive = True
-            ent.active = False
-            ent.bouncing = False
+            # ent.timer = 0
+            # ent.leftrightTrait.speed = 1
+            # ent.alive = True
+            # ent.active = False
+            # ent.bouncing = False
+            ent.alive = False
         if self.dashboard.points <= 2000:
             self.dashboard.points += 200
 

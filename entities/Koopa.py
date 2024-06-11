@@ -40,16 +40,14 @@ class Koopa(EntityBase):
             self.shellBouncing(camera)
 
     def drawKoopa(self, camera):
-        self.anIm = pygame.image.load('./img/icons/Coke.png').convert_alpha()
-        self.anIm_scale = pygame.transform.scale(self.anIm, (32*1.8, 32*1.5))
         if self.leftrightTrait.direction == -1:
             self.screen.blit(
-                self.anIm_scale, (self.rect.x + camera.x, self.rect.y-16)
+                self.animation.image, (self.rect.x + camera.x, self.rect.y - 32)
             )
         else:
             self.screen.blit(
-                pygame.transform.flip(self.anIm_scale, True, False),
-                (self.rect.x + camera.x, self.rect.y-16),
+                pygame.transform.flip(self.animation.image, True, False),
+                (self.rect.x + camera.x, self.rect.y - 32),
             )
 
     def shellBouncing(self, camera):
@@ -62,12 +60,10 @@ class Koopa(EntityBase):
     
 
     def sleepingInShell(self, camera):
-        self.anIm = pygame.image.load('./img/icons/Crushed Can.png').convert_alpha()
-        self.anIm_scale = pygame.transform.scale(self.anIm, (32*1.8, 32*2))
         if self.timer < self.timeAfterDeath:
             self.screen.blit(
-                self.anIm_scale,
-                (self.rect.x + camera.x, self.rect.y-32),
+                self.spriteCollection.get("koopa-hiding").image,
+                (self.rect.x + camera.x, self.rect.y - 32),
             )
         else:
             self.alive = True
