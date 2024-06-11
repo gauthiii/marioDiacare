@@ -1,3 +1,4 @@
+import pygame
 from classes.Animation import Animation
 from classes.Maths import Vec2D
 from entities.EntityBase import EntityBase
@@ -34,7 +35,10 @@ class RedMushroom(EntityBase):
             self.onDead(camera)
 
     def drawRedMushroom(self, camera):
-        self.screen.blit(self.animation.image, (self.rect.x + camera.x, self.rect.y))
+        self.anIm = pygame.image.load('./img/insulin.png').convert_alpha()
+        self.anIm_scale = pygame.transform.scale(self.anIm, (32, 32))
+        self.screen.blit(self.anIm_scale, (self.rect.x + camera.x, self.rect.y))
+        # self.screen.blit(self.animation.image, (self.rect.x + camera.x, self.rect.y))
         self.animation.update()
 
     def onDead(self, camera):

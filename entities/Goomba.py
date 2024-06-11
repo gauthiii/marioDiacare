@@ -1,3 +1,4 @@
+import pygame
 from classes.Animation import Animation
 from classes.Collider import Collider
 from classes.EntityCollider import EntityCollider
@@ -36,7 +37,10 @@ class Goomba(EntityBase):
             self.onDead(camera)
 
     def drawGoomba(self, camera):
-        self.screen.blit(self.animation.image, (self.rect.x + camera.x, self.rect.y))
+        self.anIm = pygame.image.load('./img/burger.png').convert_alpha()
+        self.anIm_scale = pygame.transform.scale(self.anIm, (32, 32))
+        self.screen.blit(self.anIm_scale, (self.rect.x + camera.x, self.rect.y))
+        # self.screen.blit(self.animation.image, (self.rect.x + camera.x, self.rect.y))
         self.animation.update()
 
     def onDead(self, camera):
