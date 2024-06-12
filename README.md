@@ -1,3 +1,10 @@
+# Super Mario DiaCare
+
+An educational adaptation of the classic Super Mario game, designed to teach players about diabetes management. Through interactive gameplay, players learn how blood sugar levels are influenced by various foods and activities. The game creatively integrates diabetic health concepts into the familiar Mario universe, making learning both engaging and fun. The base code of this game is inspired from this [repository](https://github.com/mx0c/super-mario-python).
+
+![gaming mario](https://github.com/gauthiii/marioDiacare/assets/35861219/587ccf4e-81f0-419a-8761-7ab07b9ff060)
+
+
 # Super Mario Implementation in Python
 
 This is inspired by Meth-Meth-Method's [super mario game](https://github.com/meth-meth-method/super-mario/)
