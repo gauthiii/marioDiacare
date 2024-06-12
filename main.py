@@ -6,6 +6,7 @@ from classes.Sound import Sound
 from entities.Mario import Mario
 from config import SCALED_WIDTH, SCALED_HEIGHT
 import sys
+#Hi Auntyy
 
 # Global flag to determine if the loading screen should be shown
 first_run = True
