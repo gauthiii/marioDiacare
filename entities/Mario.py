@@ -77,6 +77,8 @@ class Mario(EntityBase):
         self.pauseObj = Pause(screen, self, dashboard)
         self.speed = False
 
+        self.isWarning = True
+
     def update(self):
         if self.invincibilityFrames > 0:
             self.invincibilityFrames -= 1
@@ -173,6 +175,11 @@ class Mario(EntityBase):
 
     # burger or coke
     def _onCollisionWithMob(self, mob, collisionState):
+        if self.isWarning:
+            self.pause = True
+            self.pauseObj.onlyContinue = True
+            self.pauseObj.createBackgroundBlur()
+            self.isWarning = False
         if isinstance(mob, RedMushroom) and mob.alive:
             self.powerup(1)
             if self.dashboard.points1 >= 350:
