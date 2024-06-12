@@ -175,7 +175,7 @@ class Mario(EntityBase):
 
     # burger or coke
     def _onCollisionWithMob(self, mob, collisionState):
-        if self.isWarning:
+        if self.isWarning and not isinstance(mob, RedMushroom):
             self.pause = True
             self.pauseObj.onlyContinue = True
             self.pauseObj.createBackgroundBlur()
