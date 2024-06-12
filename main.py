@@ -119,88 +119,108 @@ def drawBG(screen,level):
         level.sprites.spriteCollection.get("bush_3").image, (17 * 32, 12 * 32)
     )
 
+    screen.blit(pygame.transform.scale(pygame.image.load('./img/icons/Apple.png').convert_alpha(), (32, 32)), (7.5*32, 12*32))
+
     screen.blit(pygame.transform.scale(pygame.image.load('./img/icons/Coke.png').convert_alpha(), (32*2, 32*2)), (koopax, koopay))
 
 def show_loading_screen(screen, scaled_width, scaled_height, level, sound):
-    font = pygame.font.Font('SuperMario256.ttf', 24)  # Create a font object with a specified font and size
-    full_text = "An Adaptation of Super Mario"
-    displayed_text = ""  # Start with an empty string and build it up character by character
+    font = pygame.font.Font('SuperMario256.ttf', 24)
+    full_text = "An Adaptation of Super Mario "
+    displayed_text = ""
 
-    text_surface = font.render("", True, (255, 255, 255))
+    # Define the main text color and the stroke color
+    text_color = (255, 255, 255)  # White
+    stroke_color = (0, 0, 0)  # Black
+    stroke_width = 2  # Width of the stroke
+
+    text_surface = font.render("", True, text_color)
     text_rect = text_surface.get_rect(center=(scaled_width // 2, scaled_height // 2))
-    
+
     clock = pygame.time.Clock()
-    char_interval = 200  # Time in milliseconds to wait before showing the next character
-    
+    char_interval = 200
 
     for i in range(len(full_text) + 1):
-        while pygame.time.get_ticks() % char_interval > 100:  # Minor loop to delay until the next interval
-            clock.tick(60)  # Control the loop speed to be responsive
-            for event in pygame.event.get():  # Event processing
+        while pygame.time.get_ticks() % char_interval > 100:
+            clock.tick(60)
+            for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
 
         pygame.time.delay(25)
-        displayed_text = full_text[:i]  # Get substring of the text up to the i-th character
+        displayed_text = full_text[:i]
         sound.play_sfx(sound.kick)
-        text_surface = font.render(displayed_text, True, (255, 255, 255))
-        text_rect = text_surface.get_rect(center=(scaled_width // 2, scaled_height // 2))
+        # Create the text surfaces
+        text_surface = font.render(displayed_text, True, text_color)
+        stroke_surface = font.render(displayed_text, True, stroke_color)
 
-        drawBG(screen,level)
+        # Create surfaces with strokes by blitting the stroke text offset around the main text
+        final_surface = pygame.Surface(text_surface.get_size(), pygame.SRCALPHA)
+        for dx in range(-stroke_width, stroke_width + 1):
+            for dy in range(-stroke_width, stroke_width + 1):
+                if dx * dx + dy * dy <= stroke_width * stroke_width:
+                    final_surface.blit(stroke_surface, (dx + stroke_width, dy + stroke_width))
 
-        screen.blit(text_surface, text_rect)  # Blit the current portion of the text
-        pygame.display.update()  # Update the entire screen to reflect changes
+        final_surface.blit(text_surface, (stroke_width, stroke_width))
+        text_rect = final_surface.get_rect(center=(scaled_width // 2, scaled_height // 2))
 
-        for event in pygame.event.get():  # Additional event processing within the main loop
+        drawBG(screen, level)
+
+        screen.blit(final_surface, text_rect)
+        pygame.display.update()
+
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-    pygame.time.delay(800) 
+    pygame.time.delay(800)
 
-    full_text = "Designed by Ashika Ramesh"
-    displayed_text = ""  # Start with an empty string and build it up character by character
-
-    text_surface = font.render("", True, (255, 255, 255))
-    text_rect = text_surface.get_rect(center=(scaled_width // 2, scaled_height // 2))
-    
-    clock = pygame.time.Clock()
-    char_interval = 200  # Time in milliseconds to wait before showing the next character
+    full_text = "Designed by Ashika Ramesh "
+    displayed_text = ""
 
     for i in range(len(full_text) + 1):
-        while pygame.time.get_ticks() % char_interval > 100:  # Minor loop to delay until the next interval
-            clock.tick(60)  # Control the loop speed to be responsive
-            for event in pygame.event.get():  # Event processing
-                if event.type == pygame.QUIT:
+        while pygame.time.get_ticks() % char_interval > 100:
+            clock.tick(60)
+            for event in pygame.event.get():
+                if event.type is pygame.QUIT:
                     pygame.quit()
                     sys.exit()
 
         pygame.time.delay(25)
-        displayed_text = full_text[:i]  # Get substring of the text up to the i-th character
+        displayed_text = full_text[:i]
         sound.play_sfx(sound.kick)
-        text_surface = font.render(displayed_text, True, (255, 255, 255))
-        text_rect = text_surface.get_rect(center=(scaled_width // 2, scaled_height // 2))
+        text_surface = font.render(displayed_text, True, text_color)
+        stroke_surface = font.render(displayed_text, True, stroke_color)
 
-        drawBG(screen,level)
+        final_surface = pygame.Surface(text_surface.get_size(), pygame.SRCALPHA)
+        for dx in range(-stroke_width, stroke_width + 1):
+            for dy in range(-stroke_width, stroke_width + 1):
+                if dx * dx + dy * dy <= stroke_width * stroke_width:
+                    final_surface.blit(stroke_surface, (dx + stroke_width, dy + stroke_width))
 
-        screen.blit(text_surface, text_rect)  # Blit the current portion of the text
-        pygame.display.update()  # Update the entire screen to reflect changes
+        final_surface.blit(text_surface, (stroke_width, stroke_width))
+        text_rect = final_surface.get_rect(center=(scaled_width // 2, scaled_height // 2))
 
-        for event in pygame.event.get():  # Additional event processing within the main loop
-            if event.type == pygame.QUIT:
+        drawBG(screen, level)
+
+        screen.blit(final_surface, text_rect)
+        pygame.display.update()
+
+        for event in pygame.event.get():
+            if event.type is pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-    pygame.time.delay(800)  # Hold the completed text on screen for 2 seconds after typing completes
-    # Fade-out effect
+    pygame.time.delay(800)
     fade_surface = pygame.Surface((scaled_width, scaled_height))
     fade_surface.fill((0, 0, 0))
     for alpha in range(0, 255, 5):
         fade_surface.set_alpha(alpha)
         screen.blit(fade_surface, (0, 0))
         pygame.display.update()
-        pygame.time.delay(5)  # Delay to control the speed of the fade effect
+        pygame.time.delay(5)
+
 
 
 

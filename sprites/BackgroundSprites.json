@@ -11,6 +11,14 @@
             "collision":false
         },
         {
+            "name":"sky2",
+            "x":3,
+            "y":25,
+            "redrawBg":false,
+            "scalefactor":2,
+            "collision":false
+        },
+        {
             "name":"bricks",
             "x":1,
             "y":0,
@@ -19,9 +27,25 @@
             "collision":true
         },
         {
+            "name":"bricks2",
+            "x":1,
+            "y":2,
+            "redrawBg":false,
+            "scalefactor":2,
+            "collision":true
+        },
+        {
             "name":"ground",
             "x":0,
             "y":0,
+            "redrawBg":false,
+            "scalefactor":2,
+            "collision":true
+        },
+        {
+            "name":"ground2",
+            "x":0,
+            "y":2,
             "redrawBg":false,
             "scalefactor":2,
             "collision":true
